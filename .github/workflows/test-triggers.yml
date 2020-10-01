@@ -8,25 +8,13 @@ on:
 jobs:
   build-and-test:
     # skip if the PR is a draft or if it has a WIP label or it has a test-results-out-of-date label
-    if: contains( github.event.pull_request.labels.*.name, 'skip-CI') == false && github.event.pull_request.draft == false
+    if: contains( github.event.pull_request.labels.*.name, 'WIP') == false 
     runs-on: ubuntu-latest
-    env:
-      PERCY_TOKEN_frontenduicalendare2e: ${{ secrets.PERCY_TOKEN_FRONTENDFEATCALENDARE2E }}
-      PERCY_TOKEN_playgrounddescriptione2e: ${{ secrets.PERCY_TOKEN_PLAYGROUNDDESCRIPTIONE2E }}
-      PERCY_TOKEN_frontenduidesignsysteme2e: ${{ secrets.PERCY_TOKEN_FRONTENDUIKITE2E }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      PR_ISSUE_URL: ${{ github.event.pull_request.issue_url }}
-      PR_SHA: ${{ github.event.pull_request.head.sha }}
-      PR_COMMENT_URL: ${{ github.event.pull_request.comments_url }}
-      PR_NUMBER: ${{ github.event.number }}
-      NX_BRANCH: master
-      S3_COVERAGE_REPORTS_BUCKET: 'rosa-test-coverage-reports-us-east-1'
-
+    
     steps:
       - uses: actions/checkout@v2
         # Pull the entire branch and not just the single commit
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
 
       - run: echo 'Workflow is running'
