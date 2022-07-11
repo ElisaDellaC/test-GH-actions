@@ -23,15 +23,8 @@ jobs:
         shell: bash
         run: |
           MSG=$(git log --format=%B -n 1 ${{github.event.after}})
+          echo "PR_COMMIT_MESSAGE=${MSG}" >> $GITHUB_ENV
 
-          if [[ "$MSG" == *"debug_tests"* ]]; then
-            echo ::set-output name=COMMIT_MESSAGE::${MSG}
-          fi
-    
-      - name: Use Node.js 14.18.1
-        if: steps.getCommitMessage.outputs.COMMIT_MESSAGE
-        run: |
-          echo Lets debug commit: ${{ steps.getCommitMessage.outputs.COMMIT_MESSAGE }}
-
-
+      - name: print commit message
+        run: $PR_COMMIT_MESSAGE
 
