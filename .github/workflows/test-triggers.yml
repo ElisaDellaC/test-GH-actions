@@ -33,6 +33,9 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - first-job
+    env:
+      PR_COMMIT_MESSAGE: ${{ needs.getCommitMessage.outputs['PR_COMMIT_MESSAGE'] }}
+
     steps:
      - name: print commit message from other job
        run: echo $PR_COMMIT_MESSAGE
