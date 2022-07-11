@@ -26,5 +26,5 @@ jobs:
           echo "PR_COMMIT_MESSAGE=${MSG}" >> $GITHUB_ENV
 
       - name: print commit message
-        run: $PR_COMMIT_MESSAGE
+        run: echo ${{ env.PR_COMMIT_MESSAGE }}
 
