@@ -18,6 +18,19 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
 
-      - run: |
+      - id: getCommitMessage
+        name: get commit message
+        run: |
           MSG=$(git log --format=%B -n 1 ${{github.event.after}})
-          echo "::set-env name=COMMIT_MESSAGE::${MSG}"
+
+          if [[ "$MSG" == *"debug_tests"* ]]; then
+            echo ::set-output name=COMMIT_MESSAGE::${MSG}"
+          fi
+    
+      - name: Use Node.js 14.18.1
+        if: steps.getCommitMessage.outputs.COMMIT_MESSAGE
+        run: |
+          echo Lets debug commit: ${{ steps.getCommitMessage.outputs.COMMIT_MESSAGE }}
+
+
+
