@@ -6,7 +6,7 @@ on:
     types: [synchronize, opened, reopened, ready_for_review]
 
 jobs:
-  first-job:
+  setup:
     # skip if the PR is a draft or if it has a WIP label or it has a test-results-out-of-date label
     if: github.event.pull_request.draft == false || ( github.event.pull_request.draft && contains( github.event.pull_request.labels.*.name, 'run-CI'))
     runs-on: ubuntu-latest
@@ -32,9 +32,9 @@ jobs:
   other-job:
     runs-on: ubuntu-latest
     needs:
-      - first-job
+      - setup
     env:
-      PR_COMMIT_MESSAGE: ${{ needs.getCommitMessage.outputs['PR_COMMIT_MESSAGE'] }}
+      PR_COMMIT_MESSAGE: ${{ needs.setup.outputs['PR_COMMIT_MESSAGE'] }}
 
     steps:
      - name: print commit message from other job
