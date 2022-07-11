@@ -24,9 +24,10 @@ jobs:
         run: |
           MSG=$(git log --format=%B -n 1 ${{github.event.after}})
           echo "PR_COMMIT_MESSAGE=${MSG}" >> $GITHUB_ENV
+          echo ::set-output name=PR_COMMIT_MESSAGE::${MSG}
 
       - name: print commit message
-        run: echo ${{ env.PR_COMMIT_MESSAGE }}
+        run: echo $PR_COMMIT_MESSAGE
 
   other-job:
     runs-on: ubuntu-latest
@@ -34,4 +35,4 @@ jobs:
       - first-job
     steps:
      - name: print commit message from other job
-       run: echo ${{ env.PR_COMMIT_MESSAGE }}
+       run: echo $PR_COMMIT_MESSAGE
