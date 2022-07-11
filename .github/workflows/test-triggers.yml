@@ -20,11 +20,12 @@ jobs:
 
       - id: getCommitMessage
         name: get commit message
+        shell: bash
         run: |
           MSG=$(git log --format=%B -n 1 ${{github.event.after}})
 
           if [[ "$MSG" == *"debug_tests"* ]]; then
-            echo ::set-output name=COMMIT_MESSAGE::${MSG}"
+            echo ::set-output name=COMMIT_MESSAGE::${MSG}
           fi
     
       - name: Use Node.js 14.18.1
