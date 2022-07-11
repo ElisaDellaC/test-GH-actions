@@ -24,7 +24,7 @@ jobs:
         run: |
           MSG=$(git log --format=%B -n 1 ${{github.event.after}})
           echo "PR_COMMIT_MESSAGE=${MSG}" >> $GITHUB_ENV
-          echo ::set-output name=PR_COMMIT_MESSAGE::${MSG}
+          echo "::set-output name=PR_COMMIT_MESSAGE::${MSG}"
 
       - name: print commit message
         run: echo $PR_COMMIT_MESSAGE
