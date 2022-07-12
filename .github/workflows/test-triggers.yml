@@ -27,7 +27,7 @@ jobs:
             echo "PR_COMMIT_MESSAGE=${MSG}" >> $GITHUB_ENV
           fi
       - name: Upload e2e failing test screenshots as artifacts
-        if: ${PR_COMMIT_MESSAGE}
+        if: env.PR_COMMIT_MESSAGE
         uses: actions/upload-artifact@v3
         with:
           path: dist/cypress
