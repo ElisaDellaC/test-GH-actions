@@ -25,9 +25,10 @@ jobs:
           MSG=$(git log --format=%B -n 1 ${{github.event.after}})
           if [[ "$MSG" == *"debug_tests"* ]]; then
             echo "PR_COMMIT_MESSAGE=${MSG}" >> $GITHUB_ENV
+            exit 1
           fi
       - name: Upload e2e failing test screenshots as artifacts
-        if: env.PR_COMMIT_MESSAGE
+        if: failure() && env.PR_COMMIT_MESSAGE
         uses: actions/upload-artifact@v3
         with:
           path: dist/cypress
