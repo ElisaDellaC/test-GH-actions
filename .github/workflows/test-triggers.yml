@@ -8,15 +8,7 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    env:
-      - ACTIONS_RUNNER_DEBUG
 
     steps:
-      - uses: actions/checkout@v2
-        # Pull the entire branch and not just the single commit
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
-          fetch-depth: 0
-
       - run: |
           echo action_runner_debug - "${ACTIONS_RUNNER_DEBUG}"
