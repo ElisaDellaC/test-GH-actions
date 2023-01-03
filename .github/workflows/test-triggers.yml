@@ -12,3 +12,4 @@ jobs:
     steps:
       - run: |
           echo action_runner_debug - $ACTIONS_RUNNER_DEBUG
+          exit 1
