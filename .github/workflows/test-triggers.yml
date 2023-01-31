@@ -7,11 +7,11 @@ on:
 
 jobs:
   comment_pr:
-  runs-on: ubuntu-latest
-  steps:
-    - name: comment pr
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this is added for you by default
-      uses: nickatnight/add-pr-comment-action@master
-      with:
-        body: "Your code is :poop:"
+    runs-on: ubuntu-latest
+    steps:
+      - name: comment pr
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this is added for you by default
+        uses: nickatnight/add-pr-comment-action@master
+        with:
+          body: "Your code is :poop:"
