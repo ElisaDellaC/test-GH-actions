@@ -6,12 +6,12 @@ on:
     types: [synchronize, opened, reopened, ready_for_review]
 
 jobs:
-  comment_pr:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: comment pr
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this is added for you by default
-        uses: nickatnight/add-pr-comment-action@master
+      - uses: nbaztec/add-pr-review-comment@v1
         with:
-          body: "Your code is :poop:"
+          message: |
+            [{"path":".github/workflows/test-triggers.yml","line":10,"text":"something was deleted","side":"RIGHT"}]
+          repo-token-user-login: "github-actions[bot]" # The user.login for temporary GitHub tokens
+          allow-repeats: false # This is the default
